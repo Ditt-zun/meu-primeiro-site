@@ -1,33 +1,29 @@
-const botoes = document.querySelectorAll("button");
+// Seleciona apenas os botões dentro dos artigos
+const botoesReacao = document.querySelectorAll("article button");
 
-botoes.forEach( function(botao){
+botoesReacao.forEach(function(botao) {
     let curtiu = false;
-    botao.addEventListener("click", botaoClicado);
-    function botaoClicado(){
-        console.log("fui clicado");
+    botao.addEventListener("click", function() {
         let texto = botao.querySelector("span");
-        if (curtiu === false) {
-            texto.textContent++;
-            curtiu = true;
-        } else {
-            texto.textContent++;
-            curtiu = false;
-            }
-        }
-    })
-
-const btnTemaEscuro = document.querySelector(".btn-tema-escuro");
- btnTemaEscuro.addEventListener("click", mudaTema);
-        function mudaTema () {
-            const corpoPagina = document.body;
-            if (corpoPagina.classlist.contains("tema-escuro")) {
-                corpoPagina.classlist.remove("tema-escuro");
+        if (texto) {
+            if (!curtiu) {
+                texto.textContent++;
+                curtiu = true;
             } else {
-                corpoPagina.classlist.add("tema-escuro");
+                texto.textContent--;
+                curtiu = false;
             }
         }
+    });
+});
 
+// Lógica do Tema Escuro
+const btnTemaEscuro = document.querySelector(".btn-tema-escuro");
 
+btnTemaEscuro.addEventListener("click", mudaTema);
 
-
-
+function mudaTema() {
+    const corpoPagina = document.body;
+    // O method toggle adiciona a classe se ela não existir e remove se existir
+    corpoPagina.classList.toggle("tema-escuro");
+}
